@@ -144,6 +144,10 @@ static void render_status(void) {
     oled_write_P(led_state.caps_lock ? PSTR("CPLCK\n") : PSTR("     \n"), false);
     oled_write_P(led_state.scroll_lock ? PSTR("SCLCK\n") : PSTR("     \n"), false);
 
+    oled_set_cursor(0, 9);
+    oled_write("WPM:\n", false);
+    oled_write(get_u8_str(get_current_wpm(), '0'), false);
+
     // TODO: show ctrl, shift, alt
 }
 
