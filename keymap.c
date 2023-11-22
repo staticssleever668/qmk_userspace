@@ -142,7 +142,7 @@ static void render_status(void) {
 }
 
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
+    if (is_keyboard_left()) {
         render_status();
     } else {
         render_logo();
