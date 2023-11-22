@@ -116,7 +116,7 @@ static void render_logo(void) {
 
 // NOTE: rotation 90/270 can fit 5 characters horizontally
 static void render_status(void) {
-    oled_write_P(PSTR("Layer\n     "), false);
+    oled_write_P(PSTR("Layer"), false);
     switch (get_highest_layer(layer_state)) {
         case MY_LAYER_BASE:
             oled_write_P(PSTR("Base\n"), false);
@@ -140,15 +140,16 @@ static void render_status(void) {
     }
 
     led_t led_state = host_keyboard_led_state();
-    oled_write_P(led_state.num_lock ? PSTR("NMLCK\n") : PSTR("     \n"), false);
-    oled_write_P(led_state.caps_lock ? PSTR("CPLCK\n") : PSTR("     \n"), false);
-    oled_write_P(led_state.scroll_lock ? PSTR("SCLCK\n") : PSTR("     \n"), false);
+    const uint8_t modifiers = get_mods() | get_oneshot_mods();
+    oled_write_P(PSTR("\nMods\n"), false);
+    oled_write_P((modifiers & MOD_MASK_SHIFT) || led_state.caps_lock ? PSTR("S") : PSTR(" "), false);
+    oled_write_P((modifiers & MOD_MASK_CTRL) ? PSTR("C") : PSTR(" "), false);
+    oled_write_P((modifiers & MOD_MASK_ALT) ? PSTR("A") : PSTR(" "), false);
+    oled_write_P((modifiers & MOD_MASK_GUI) ? PSTR("G") : PSTR(" "), false);
 
     oled_set_cursor(0, 9);
-    oled_write("WPM:\n", false);
+    oled_write_P(PSTR("WPM\n"), false);
     oled_write(get_u8_str(get_current_wpm(), '0'), false);
-
-    // TODO: show ctrl, shift, alt
 }
 
 bool oled_task_user(void) {
