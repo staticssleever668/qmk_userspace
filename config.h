@@ -6,3 +6,7 @@
 #ifdef NKRO_ENABLE
 #define FORCE_NKRO
 #endif // NKRO_ENABLE
+
+#ifdef WPM_ENABLE
+#    define SPLIT_WPM_ENABLE
+#endif // WPM_ENABLE
