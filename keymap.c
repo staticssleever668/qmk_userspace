@@ -90,6 +90,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 
 #ifdef OLED_ENABLE
 static void render_logo(void) {
+    // TODO: show a cat picture!!
     // clang-format off
     // https://joric.github.io/qle/
     static const char PROGMEM raw_logo[] = {
@@ -113,8 +114,9 @@ static void render_logo(void) {
     oled_write_raw_P(raw_logo, sizeof(raw_logo));
 }
 
+// NOTE: rotation 90/270 can fit 5 characters horizontally
 static void render_status(void) {
-    oled_write_P(PSTR("Layer: "), false);
+    oled_write_P(PSTR("Layer\n     "), false);
     switch (get_highest_layer(layer_state)) {
         case MY_LAYER_BASE:
             oled_write_P(PSTR("Base\n"), false);
@@ -126,21 +128,23 @@ static void render_status(void) {
             oled_write_P(PSTR("Raise\n"), false);
             break;
         case MY_LAYER_ADJUST:
-            oled_write_P(PSTR("Adjust\n"), false);
+            oled_write_P(PSTR("Adj\n"), false);
             break;
         case MY_LAYER_GAYMING:
-            oled_write_P(PSTR("Gayming!!!\n"), false);
+            oled_write_P(PSTR("Gayms\n"), false);
             break;
         default:
             // Should be unreachable.
-            oled_write_P(PSTR("Undefined\n"), false);
+            oled_write_P(PSTR("Undef\n"), false);
             break;
     }
 
     led_t led_state = host_keyboard_led_state();
-    oled_write_P(led_state.num_lock ? PSTR("NUMLCK ") : PSTR("       "), false);
-    oled_write_P(led_state.caps_lock ? PSTR("CAPLCK ") : PSTR("       "), false);
-    oled_write_P(led_state.scroll_lock ? PSTR("SCRLCK ") : PSTR("       "), false);
+    oled_write_P(led_state.num_lock ? PSTR("NMLCK\n") : PSTR("     \n"), false);
+    oled_write_P(led_state.caps_lock ? PSTR("CPLCK\n") : PSTR("     \n"), false);
+    oled_write_P(led_state.scroll_lock ? PSTR("SCLCK\n") : PSTR("     \n"), false);
+
+    // TODO: show ctrl, shift, alt
 }
 
 bool oled_task_user(void) {
@@ -149,8 +153,15 @@ bool oled_task_user(void) {
     } else {
         render_logo();
     }
-
     // `false` - don't run built-in OLED task.
     return false;
 }
+
+oled_rotation_t oled_init_user(oled_rotation_t rotation) {
+    if (is_keyboard_left()) {
+        return OLED_ROTATION_270;
+    }
+    return rotation;
+}
+
 #endif // OLED_ENABLE
