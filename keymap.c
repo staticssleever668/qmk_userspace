@@ -127,7 +127,6 @@ static void render_status(void) {
             oled_write_P(PSTR("Adjust\n"), false);
             break;
         case MY_LAYER_GAYMING:
-            // TODO: hint to exit?
             oled_write_P(PSTR("Gayming!!!\n"), false);
             break;
         default:
