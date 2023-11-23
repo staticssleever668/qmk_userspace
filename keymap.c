@@ -119,23 +119,23 @@ static void render_status(void) {
     oled_write_P(PSTR("Layer"), false);
     switch (get_highest_layer(layer_state)) {
         case MY_LAYER_BASE:
-            oled_write_P(PSTR("Base\n"), false);
+            oled_write_P(PSTR("Base "), false);
             break;
         case MY_LAYER_LOWER:
-            oled_write_P(PSTR("Lower\n"), false);
+            oled_write_P(PSTR("Lower"), false);
             break;
         case MY_LAYER_RAISE:
-            oled_write_P(PSTR("Raise\n"), false);
+            oled_write_P(PSTR("Raise"), false);
             break;
         case MY_LAYER_ADJUST:
-            oled_write_P(PSTR("Adj\n"), false);
+            oled_write_P(PSTR("Adj  "), false);
             break;
         case MY_LAYER_GAYMING:
-            oled_write_P(PSTR("Gayms\n"), false);
+            oled_write_P(PSTR("Gayms"), false);
             break;
         default:
             // Should be unreachable.
-            oled_write_P(PSTR("Undef\n"), false);
+            oled_write_P(PSTR("Undef"), false);
             break;
     }
 
