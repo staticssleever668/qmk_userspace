@@ -4,7 +4,7 @@
 #define EE_HANDS
 
 #ifdef NKRO_ENABLE
-#define FORCE_NKRO
+#    define FORCE_NKRO
 #endif // NKRO_ENABLE
 
 #ifdef WPM_ENABLE
