@@ -7,6 +7,10 @@
 #    define FORCE_NKRO
 #endif // NKRO_ENABLE
 
+#ifdef OLED_ENABLE
+#    define OLED_BRIGHTNESS 96
+#endif // OLED_ENABLE
+
 #ifdef WPM_ENABLE
 #    define SPLIT_WPM_ENABLE
 #endif // WPM_ENABLE
