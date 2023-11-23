@@ -139,7 +139,7 @@ static void render_status(void) {
             break;
     }
 
-    led_t led_state = host_keyboard_led_state();
+    led_t         led_state = host_keyboard_led_state();
     const uint8_t modifiers = get_mods() | get_oneshot_mods();
     oled_write_P(PSTR("\nMods\n"), false);
     oled_write_P((modifiers & MOD_MASK_SHIFT) || led_state.caps_lock ? PSTR("S") : PSTR(" "), false);
