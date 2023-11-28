@@ -88,6 +88,23 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return update_tri_layer_state(state, MY_LAYER_LOWER, MY_LAYER_RAISE, MY_LAYER_ADJUST);
 }
 
+bool shutdown_user(const bool jump_to_bootloader) {
+#ifdef OLED_ENABLE
+    oled_clear();
+    for (int i = 0; i < 16; i++) {
+        oled_set_cursor(0, i);
+        if (jump_to_bootloader) {
+            oled_write_P(PSTR("flash"), false);
+        } else {
+            oled_write_P(PSTR("start"), false);
+        }
+    }
+    oled_render_dirty(true);
+#endif // OLED_ENABLE
+    // `false` - don't run _kb task.
+    return false;
+}
+
 #ifdef OLED_ENABLE
 static void render_logo(void) {
     // TODO: show a cat picture!!
