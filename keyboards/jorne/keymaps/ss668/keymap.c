@@ -14,18 +14,7 @@ enum MY_LAYER___________ {
 };
 
 #define RBR_RGU MT(MOD_RGUI, KC_RBRC)
-#define F12_RGU MT(MOD_RGUI, KC_F12)
-#define PLS_LCT MT(MOD_LCTL, KC_PPLS)
-#define EQL_LCT MT(MOD_LCTL, KC_PEQL)
-#define APP_LCT MT(MOD_LCTL, KC_APP)
-#define EQL_RCT MT(MOD_RCTL, KC_PEQL)
-#define QUO_RCT MT(MOD_RCTL, KC_QUOT)
-#define APP_RCT MT(MOD_RCTL, KC_APP)
-#define MIN_RCT MT(MOD_RCTL, KC_MINS)
-#define EQL_LAL MT(MOD_LALT, KC_EQL)
 #define BSL_RAL MT(MOD_RALT, KC_BSLS)
-#define BSP_LSH MT(MOD_LSFT, KC_BSPC)
-#define SPC_RSH MT(MOD_RSFT, KC_SPC)
 #define DEL_RSE LT(MY_LAYER_RAISE, KC_DEL)
 #define TAB_RSE LT(MY_LAYER_RAISE, KC_TAB)
 #define ENT_LWR LT(MY_LAYER_LOWER, KC_ENT)
@@ -53,9 +42,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 
 [MY_LAYER_LOWER] = LAYOUT(
-  XXXXXXX, KC_UNDS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  F12_RGU,
-           PLS_LCT, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, MIN_RCT,
-           EQL_LAL, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    XXXXXXX,
+  XXXXXXX, XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+           KC_PLUS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
+           KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
                                       _______, _______, _______,      _______, _______, _______
 ),
 
