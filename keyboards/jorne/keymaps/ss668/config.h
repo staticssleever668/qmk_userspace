@@ -8,7 +8,7 @@
 #endif // NKRO_ENABLE
 
 #ifdef OLED_ENABLE
-#    define OLED_BRIGHTNESS 96
+#    define OLED_BRIGHTNESS 64
 #endif // OLED_ENABLE
 
 #ifdef WPM_ENABLE
