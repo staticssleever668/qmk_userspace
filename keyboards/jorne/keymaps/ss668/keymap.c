@@ -5,22 +5,22 @@
 
 #include "quantum.h"
 
-enum MY_LAYER___________ {
-    MY_LAYER_BASE = 0,
-    MY_LAYER_LOWER,
-    MY_LAYER_RAISE,
-    MY_LAYER_ADJUST,
-    MY_LAYER_GAYMING,
+enum SS668_LAYER {
+    SS668_LAYER_HOME = 0,
+    SS668_LAYER_NUMBERS,
+    SS668_LAYER_NAVIGATION,
+    SS668_LAYER_ADJUST,
+    SS668_LAYER_GAMING,
 };
 
 #define RBR_RGU MT(MOD_RGUI, KC_RBRC)
 #define BSL_RAL MT(MOD_RALT, KC_BSLS)
-#define DEL_RSE LT(MY_LAYER_RAISE, KC_DEL)
-#define TAB_RSE LT(MY_LAYER_RAISE, KC_TAB)
-#define ENT_LWR LT(MY_LAYER_LOWER, KC_ENT)
-#define ESC_LWR LT(MY_LAYER_LOWER, KC_ESC)
-#define GAY_LYR TO(MY_LAYER_GAYMING)
-#define BSE_LYR TO(MY_LAYER_BASE)
+#define DEL_RSE LT(SS668_LAYER_NAVIGATION, KC_DEL)
+#define TAB_RSE LT(SS668_LAYER_NAVIGATION, KC_TAB)
+#define ENT_LWR LT(SS668_LAYER_NUMBERS, KC_ENT)
+#define ESC_LWR LT(SS668_LAYER_NUMBERS, KC_ESC)
+#define GAY_LYR TO(SS668_LAYER_GAMING)
+#define BSE_LYR TO(SS668_LAYER_HOME)
 
 #define LALT_L MT(MOD_LALT, KC_L)
 #define LALT_S MT(MOD_LALT, KC_S)
@@ -34,35 +34,35 @@ enum MY_LAYER___________ {
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
-[MY_LAYER_BASE] = LAYOUT(
+[SS668_LAYER_HOME] = LAYOUT(
   XXXXXXX, KC_GRV,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, KC_RBRC,
            XXXXXXX, LGUI_A,  LALT_S,  LCTL_D,  LSFT_F,  KC_G,         KC_H,    LSFT_J,  LCTL_K,  LALT_L,  LG_CLN,  KC_QUOT,
            XXXXXXX, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_BSLS,
                                       TAB_RSE, KC_SPC,  ESC_LWR,      ENT_LWR, KC_BSPC, DEL_RSE
 ),
 
-[MY_LAYER_LOWER] = LAYOUT(
+[SS668_LAYER_NUMBERS] = LAYOUT(
   XXXXXXX, XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,        KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
            KC_PLUS, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC,      KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_UNDS,
            KC_EQL,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,         KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,
                                       _______, _______, _______,      _______, _______, _______
 ),
 
-[MY_LAYER_RAISE] = LAYOUT(
+[SS668_LAYER_NAVIGATION] = LAYOUT(
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      KC_VOLU, KC_PSCR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, XXXXXXX, XXXXXXX,
            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      KC_VOLD, XXXXXXX, KC_PGDN, KC_PGUP, XXXXXXX, XXXXXXX,
                                       _______, _______, _______,      _______, _______, _______
 ),
 
-[MY_LAYER_ADJUST] = LAYOUT(
+[SS668_LAYER_ADJUST] = LAYOUT(
   QK_BOOT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      GAY_LYR, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  QK_BOOT,
            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                       XXXXXXX, XXXXXXX, XXXXXXX,      XXXXXXX, XXXXXXX, XXXXXXX
 ),
 
-[MY_LAYER_GAYMING] = LAYOUT(
+[SS668_LAYER_GAMING] = LAYOUT(
   KC_LGUI, KC_GRV,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,         KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, RBR_RGU,
            KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,         KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, RCTL_T(KC_QUOT),
            KC_LALT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,         KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, BSL_RAL,
@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 layer_state_t layer_state_set_user(layer_state_t state) {
-    return update_tri_layer_state(state, MY_LAYER_LOWER, MY_LAYER_RAISE, MY_LAYER_ADJUST);
+    return update_tri_layer_state(state, SS668_LAYER_NUMBERS, SS668_LAYER_NAVIGATION, SS668_LAYER_ADJUST);
 }
 
 bool shutdown_user(const bool jump_to_bootloader) {
@@ -127,23 +127,23 @@ static const char PROGMEM s_ss668_logo_cat[] = {
 // @param[out] out_logo_size Non-null pointer with size of 'out_logo'
 static void get_logo(const char** out_logo, uint16_t* out_logo_size) {
     switch (get_highest_layer(layer_state)) {
-        case MY_LAYER_BASE:
+        case SS668_LAYER_HOME:
             *out_logo      = s_ss668_logo_home;
             *out_logo_size = sizeof(s_ss668_logo_home);
             break;
-        case MY_LAYER_LOWER:
+        case SS668_LAYER_NUMBERS:
             *out_logo      = s_ss668_logo_numbers;
             *out_logo_size = sizeof(s_ss668_logo_numbers);
             break;
-        case MY_LAYER_RAISE:
+        case SS668_LAYER_NAVIGATION:
             *out_logo      = s_ss668_logo_navigation;
             *out_logo_size = sizeof(s_ss668_logo_navigation);
             break;
-        case MY_LAYER_ADJUST:
+        case SS668_LAYER_ADJUST:
             *out_logo      = s_ss668_logo_adjust;
             *out_logo_size = sizeof(s_ss668_logo_adjust);
             break;
-        case MY_LAYER_GAYMING:
+        case SS668_LAYER_GAMING:
             *out_logo      = s_ss668_logo_cat;
             *out_logo_size = sizeof(s_ss668_logo_cat);
             break;
@@ -167,19 +167,19 @@ static void render_logo(void) {
 static void render_status(void) {
     oled_write_P(PSTR("Layer"), false);
     switch (get_highest_layer(layer_state)) {
-        case MY_LAYER_BASE:
+        case SS668_LAYER_HOME:
             oled_write_P(PSTR("Base "), false);
             break;
-        case MY_LAYER_LOWER:
+        case SS668_LAYER_NUMBERS:
             oled_write_P(PSTR("Lower"), false);
             break;
-        case MY_LAYER_RAISE:
+        case SS668_LAYER_NAVIGATION:
             oled_write_P(PSTR("Raise"), false);
             break;
-        case MY_LAYER_ADJUST:
+        case SS668_LAYER_ADJUST:
             oled_write_P(PSTR("Adj  "), false);
             break;
-        case MY_LAYER_GAYMING:
+        case SS668_LAYER_GAMING:
             oled_write_P(PSTR("Gayms"), false);
             break;
         default:
