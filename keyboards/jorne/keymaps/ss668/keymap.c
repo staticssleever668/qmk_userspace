@@ -71,6 +71,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 }; // keymaps
 
+_Static_assert(ARRAY_SIZE(keymaps) < MAX_LAYER, "More layers than enabled");
+
 // clang-format on
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -125,8 +127,8 @@ static const char PROGMEM s_ss668_logo_cat[] = {
 
 // @param[out] out_logo Non-null pointer to pointer with logo
 // @param[out] out_logo_size Non-null pointer with size of 'out_logo'
-static void get_logo(const char** out_logo, uint16_t* out_logo_size) {
-    switch (get_highest_layer(layer_state)) {
+static void get_logo(const layer_state_t layer_idx, const char** out_logo, uint16_t* out_logo_size) {
+    switch (layer_idx) {
         case SS668_LAYER_HOME:
             *out_logo      = s_ss668_logo_home;
             *out_logo_size = sizeof(s_ss668_logo_home);
@@ -155,10 +157,19 @@ static void get_logo(const char** out_logo, uint16_t* out_logo_size) {
 }
 
 static void render_right(void) {
+    const layer_state_t current_layer = get_highest_layer(layer_state);
+
+    // OPTIMIZATION: don't re-render the same thing when not needed.
+    static layer_state_t last_layer = MAX_LAYER + 1;
+    if (current_layer == last_layer) {
+        return;
+    }
+    last_layer = current_layer;
+
     oled_clear();
     const char* raw_logo;
     uint16_t    raw_logo_size;
-    get_logo(&raw_logo, &raw_logo_size);
+    get_logo(current_layer, &raw_logo, &raw_logo_size);
     // TODO: maybe draw at the bottom?
     oled_write_raw_P(raw_logo, raw_logo_size);
 }
