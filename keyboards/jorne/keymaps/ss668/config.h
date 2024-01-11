@@ -1,3 +1,6 @@
+// Copyright 2024 Yaroslav Chvanov
+// SPDX-License-Identifier: GPL-2.0-or-later
+
 #pragma once
 
 // Then run `make jorne/rev1:ss668:avrdude-split-right`.
