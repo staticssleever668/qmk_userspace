@@ -82,7 +82,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 bool shutdown_user(const bool jump_to_bootloader) {
 #ifdef OLED_ENABLE
     oled_clear();
-    for (uint8_t i = 0; i < 16; i++) {
+    for (uint8_t i = 0; i < oled_max_lines(); i++) {
         oled_set_cursor(0, i);
         if (jump_to_bootloader) {
             oled_write_P(PSTR("flash"), false);
