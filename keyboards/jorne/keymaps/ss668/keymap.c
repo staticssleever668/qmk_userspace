@@ -154,7 +154,7 @@ static void get_logo(const char** out_logo, uint16_t* out_logo_size) {
     }
 }
 
-static void render_logo(void) {
+static void render_right(void) {
     oled_clear();
     const char* raw_logo;
     uint16_t    raw_logo_size;
@@ -164,7 +164,7 @@ static void render_logo(void) {
 }
 
 // NOTE: rotation 90/270 can fit 5 characters horizontally
-static void render_status(void) {
+static void render_left(void) {
     oled_write_P(PSTR("Layer"), false);
     switch (get_highest_layer(layer_state)) {
         case SS668_LAYER_HOME:
@@ -201,13 +201,13 @@ static void render_status(void) {
     oled_write(get_u8_str(get_current_wpm(), '0'), false);
 }
 
+// @retval false don't run built-in OLED task
 bool oled_task_user(void) {
     if (is_keyboard_left()) {
-        render_status();
+        render_left();
     } else {
-        render_logo();
+        render_right();
     }
-    // `false` - don't run built-in OLED task.
     return false;
 }
 
