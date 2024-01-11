@@ -170,7 +170,6 @@ static void ss668_jorne_render_right(void) {
     const char* raw_logo;
     uint16_t    raw_logo_size;
     ss668_jorne_get_logo(current_layer, &raw_logo, &raw_logo_size);
-    // TODO: maybe draw at the bottom?
     oled_write_raw_P(raw_logo, raw_logo_size);
 }
 
