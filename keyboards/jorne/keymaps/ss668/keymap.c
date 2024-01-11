@@ -174,6 +174,15 @@ static void ss668_jorne_render_right(void) {
     oled_write_raw_P(raw_logo, raw_logo_size);
 }
 
+// get_mods() and get_oneshot_mods() if supported.
+static uint8_t ss668_jorne_get_mods(void) {
+    uint8_t mods = get_mods();
+#    ifndef NO_ACTION_ONESHOT
+    mods |= get_oneshot_mods();
+#    endif // NO_ACTION_ONESHOT
+    return mods;
+};
+
 // NOTE: rotation 90/270 can fit 5 characters horizontally
 static void ss668_jorne_render_left(void) {
     oled_write_P(PSTR("Layer"), false);
@@ -200,7 +209,7 @@ static void ss668_jorne_render_left(void) {
     }
 
     const led_t   led_state = host_keyboard_led_state();
-    const uint8_t mods      = get_mods() | get_oneshot_mods();
+    const uint8_t mods      = ss668_jorne_get_mods();
     oled_write_P(PSTR("\nMods\n"), false);
     oled_write_P((mods & MOD_MASK_SHIFT) || led_state.caps_lock ? PSTR("S") : PSTR(" "), false);
     oled_write_P((mods & MOD_MASK_CTRL) ? PSTR("C") : PSTR(" "), false);
