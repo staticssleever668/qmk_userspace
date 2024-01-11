@@ -82,7 +82,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
 bool shutdown_user(const bool jump_to_bootloader) {
 #ifdef OLED_ENABLE
     oled_clear();
-    for (int i = 0; i < 16; i++) {
+    for (uint8_t i = 0; i < 16; i++) {
         oled_set_cursor(0, i);
         if (jump_to_bootloader) {
             oled_write_P(PSTR("flash"), false);
@@ -127,7 +127,7 @@ static const char PROGMEM s_ss668_logo_cat[] = {
 
 // @param[out] out_logo Non-null pointer to pointer with logo
 // @param[out] out_logo_size Non-null pointer with size of 'out_logo'
-static void get_logo(const layer_state_t layer_idx, const char** out_logo, uint16_t* out_logo_size) {
+static void ss668_jorne_get_logo(const layer_state_t layer_idx, const char** out_logo, uint16_t* out_logo_size) {
     switch (layer_idx) {
         case SS668_LAYER_HOME:
             *out_logo      = s_ss668_logo_home;
@@ -156,7 +156,7 @@ static void get_logo(const layer_state_t layer_idx, const char** out_logo, uint1
     }
 }
 
-static void render_right(void) {
+static void ss668_jorne_render_right(void) {
     const layer_state_t current_layer = get_highest_layer(layer_state);
 
     // OPTIMIZATION: don't re-render the same thing when not needed.
@@ -169,13 +169,13 @@ static void render_right(void) {
     oled_clear();
     const char* raw_logo;
     uint16_t    raw_logo_size;
-    get_logo(current_layer, &raw_logo, &raw_logo_size);
+    ss668_jorne_get_logo(current_layer, &raw_logo, &raw_logo_size);
     // TODO: maybe draw at the bottom?
     oled_write_raw_P(raw_logo, raw_logo_size);
 }
 
 // NOTE: rotation 90/270 can fit 5 characters horizontally
-static void render_left(void) {
+static void ss668_jorne_render_left(void) {
     oled_write_P(PSTR("Layer"), false);
     switch (get_highest_layer(layer_state)) {
         case SS668_LAYER_HOME:
@@ -199,13 +199,13 @@ static void render_left(void) {
             break;
     }
 
-    led_t         led_state = host_keyboard_led_state();
-    const uint8_t modifiers = get_mods() | get_oneshot_mods();
+    const led_t   led_state = host_keyboard_led_state();
+    const uint8_t mods      = get_mods() | get_oneshot_mods();
     oled_write_P(PSTR("\nMods\n"), false);
-    oled_write_P((modifiers & MOD_MASK_SHIFT) || led_state.caps_lock ? PSTR("S") : PSTR(" "), false);
-    oled_write_P((modifiers & MOD_MASK_CTRL) ? PSTR("C") : PSTR(" "), false);
-    oled_write_P((modifiers & MOD_MASK_ALT) ? PSTR("A") : PSTR(" "), false);
-    oled_write_P((modifiers & MOD_MASK_GUI) ? PSTR("G") : PSTR(" "), false);
+    oled_write_P((mods & MOD_MASK_SHIFT) || led_state.caps_lock ? PSTR("S") : PSTR(" "), false);
+    oled_write_P((mods & MOD_MASK_CTRL) ? PSTR("C") : PSTR(" "), false);
+    oled_write_P((mods & MOD_MASK_ALT) ? PSTR("A") : PSTR(" "), false);
+    oled_write_P((mods & MOD_MASK_GUI) ? PSTR("G") : PSTR(" "), false);
 
 #    ifdef WPM_ENABLE
     oled_set_cursor(0, 9);
@@ -217,9 +217,9 @@ static void render_left(void) {
 // @retval false don't run built-in OLED task
 bool oled_task_user(void) {
     if (is_keyboard_left()) {
-        render_left();
+        ss668_jorne_render_left();
     } else {
-        render_right();
+        ss668_jorne_render_right();
     }
     return false;
 }
