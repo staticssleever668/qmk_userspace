@@ -27,3 +27,6 @@
 #ifdef CONSOLE_ENABLE
 #    define DEBUG_MATRIX_SCAN_RATE
 #endif // CONSOLE_ENABLE
+
+// Try typing 'should little rebase'.
+#define TAPPING_TERM 220 // The default is 200ms.
