@@ -214,12 +214,6 @@ static void ss668_jorne_render_left(void) {
     oled_write_P((mods & MOD_MASK_CTRL) ? PSTR("C") : PSTR(" "), false);
     oled_write_P((mods & MOD_MASK_ALT) ? PSTR("A") : PSTR(" "), false);
     oled_write_P((mods & MOD_MASK_GUI) ? PSTR("G") : PSTR(" "), false);
-
-#    ifdef WPM_ENABLE
-    oled_set_cursor(0, 9);
-    oled_write_P(PSTR("WPM\n"), false);
-    oled_write(get_u8_str(get_current_wpm(), '0'), false);
-#    endif // WPM_ENABLE
 }
 
 // @retval false don't run built-in OLED task

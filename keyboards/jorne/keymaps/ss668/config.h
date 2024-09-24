@@ -20,10 +20,6 @@
 #    define OLED_BRIGHTNESS 64
 #endif // OLED_ENABLE
 
-#ifdef WPM_ENABLE
-#    define SPLIT_WPM_ENABLE
-#endif // WPM_ENABLE
-
 #ifdef CONSOLE_ENABLE
 #    define DEBUG_MATRIX_SCAN_RATE
 #endif // CONSOLE_ENABLE
