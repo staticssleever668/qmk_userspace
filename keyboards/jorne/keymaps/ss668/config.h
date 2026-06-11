@@ -6,7 +6,7 @@
 // Then run `make jorne/rev1:ss668:avrdude-split-right`.
 #define EE_HANDS
 
-// https://qmk.github.io/qmk-11ty/faqs/squeezing-the-most-out-of-avr/
+// https://docs.qmk.fm/squeezing_avr#squeezing-the-most-out-of-avr
 #define LAYER_STATE_8BIT
 #define NO_ACTION_ONESHOT
 #undef LOCKING_RESYNC_ENABLE
