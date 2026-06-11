@@ -13,7 +13,7 @@
 #undef LOCKING_SUPPORT_ENABLE
 
 #ifdef NKRO_ENABLE
-#    define FORCE_NKRO
+#    define NKRO_DEFAULT_ON true
 #endif // NKRO_ENABLE
 
 #ifdef OLED_ENABLE
