@@ -2,6 +2,7 @@
 
 #include QMK_KEYBOARD_H
 
+#ifdef RGBLIGHT_ENABLE
 const rgblight_segment_t PROGMEM my_capslock_layer[] = RGBLIGHT_LAYER_SEGMENTS({0, 14, HSV_RED}, {28, 1, HSV_RED});
 const rgblight_segment_t PROGMEM fn1_active_layer[]  = RGBLIGHT_LAYER_SEGMENTS({55, 9, HSV_CYAN});
 
@@ -15,15 +16,19 @@ bool led_update_user(led_t led_state) {
     rgblight_set_layer_state(0, led_state.caps_lock);
     return true;
 }
+#endif // RGBLIGHT_ENABLE
 
 void keyboard_post_init_user(void) {
-    rgblight_layers = my_rgb_layers;
 #ifdef CONSOLE_ENABLE
     debug_enable   = true;
     debug_matrix   = true;
     debug_keyboard = true;
     debug_mouse    = true;
 #endif // CONSOLE_ENABLE
+
+#ifdef RGBLIGHT_ENABLE
+    rgblight_layers = my_rgb_layers;
+#endif // RGBLIGHT_ENABLE
 }
 
 // clang-format off
